@@ -1,6 +1,6 @@
 ﻿/*
 Name: Cryptography 
-Author: Daniel Bearman
+Author: Daniel Bearman, Angelo Hague
 Date: 24/10/17
 */
 using System;
@@ -20,18 +20,19 @@ namespace Cryptography
 
             if (mode == 1)
             {
-                string encrypted = encrypt(input, shift);
+                string encrypted = Encrypt(input, shift);
                 Console.WriteLine(encrypted);
             }
             else if (mode == 2)
             {
-                //string decrypted = decrypt(input, shift);
+                string decrypted = Decrypt(input, shift);
+                Console.WriteLine(decrypted);
             }
 
             Console.ReadKey();
         }
-
-        static string encrypt(string text, int shift)
+        
+        static string Encrypt(string text, int shift)
         {
             text = text.ToLower(); //make the letters all lower case so we dont have to deal with case
             char[] characters = text.ToCharArray(); //Convert our text into a char array
@@ -52,9 +53,26 @@ namespace Cryptography
             return new string(characters);
         }
 
-        //static string decrypt(string text, int shift)
-        //{
-        //}
+        static string Decrypt(string text, int shift)
+        {
+            text = text.ToLower();
+            char[] characters = text.ToCharArray();
+            for(int i =0; i < characters.Length; i++)
+            {
+                char letter = characters[i]; //Get our letter into a variable to make things easier
+                letter = (char)(letter - shift); //Shift our letters back the desired amount
+                if (letter > 'z') //The upper limit is 'z' (because we only have 26 letters), so subtract 26 (the alphabet) if we overflow the max
+                {
+                    letter = (char)(letter - 26);
+                }
+                else if (letter < 'a') //The lower limit is 'a' (because a is the lowest letter), so add 26 if we underflow the array
+                {
+                    letter = (char)(letter + 26);
+                }
+                characters[i] = letter; //replace the origional letter with the 'encrypted' letter
+            }
+            return new string(characters);
+        }
     }
 }
 
