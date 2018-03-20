@@ -1,7 +1,8 @@
 ﻿/*
 Name: Cryptography
 Author: Daniel Bearman, Angelo Hague
-Date: 24/10/17
+Creation: 24/10/17
+State: Complete
 */
 using System;
 using System.Collections.Generic;
